@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>もうAIで迷子にならない！やさしいAI×AntiGravity 実践セミナー</title>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --blue: #0ea5e9;
+            --blue-soft: #bae6fd;
+            --blue-bg: #f0f9ff;
+            --text: #2d2d2d;
+            --text-sub: #6b6b6b;
+            --border: #eee;
+            --white: #ffffff;
+            --bg: #fafafa;
+        }
+
+        body {
+            font-family: 'Zen Maru Gothic', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.9;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ===== ヘッダー ===== */
+        .hero {
+            background: linear-gradient(180deg, var(--blue-bg) 0%, var(--white) 100%);
+            padding: 56px 24px 40px;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--blue);
+            color: white;
+            padding: 5px 18px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-size: 26px;
+            font-weight: 900;
+            line-height: 1.6;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        .hero h1 .accent {
+            color: var(--blue);
+            display: block;
+            font-size: 30px;
+            margin-top: 6px;
+        }
+
+        .hero-sub {
+            font-size: 14px;
+            color: var(--text-sub);
+            margin-bottom: 24px;
+            line-height: 1.8;
+        }
+
+        .hero-free {
+            display: inline-block;
+            background: var(--white);
+            border: 2px solid var(--blue);
+            color: var(--blue);
+            font-weight: 900;
+            font-size: 18px;
+            padding: 10px 32px;
+            border-radius: 50px;
+            letter-spacing: 2px;
+        }
+
+        /* ===== 区切り線 ===== */
+        .divider {
+            width: 40px;
+            height: 3px;
+            background: var(--blue-soft);
+            margin: 0 auto;
+            border-radius: 2px;
+        }
+
+        /* ===== セクション共通 ===== */
+        section {
+            padding: 56px 24px;
+        }
+
+        .sec-label {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--blue);
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+
+        .sec-title {
+            font-size: 22px;
+            font-weight: 900;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .sec-title .em {
+            color: var(--blue);
+        }
+
+        .sec-body {
+            font-size: 15px;
+            color: var(--text-sub);
+            line-height: 2;
+        }
+
+        .sec-body strong {
+            color: var(--text);
+        }
+
+        /* ===== 問題提起 ===== */
+        .problem {
+            background: var(--blue-bg);
+        }
+
+        /* ===== 吹き出しスタイル ===== */
+        .voice-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .voice-item .voice-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--white);
+            border: 2px solid var(--blue-soft);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+            margin-top: 4px;
+        }
+
+        .voice-item .voice-bubble {
+            background: var(--white);
+            border-radius: 0 14px 14px 14px;
+            padding: 14px 18px;
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 1.7;
+            color: var(--text);
+            position: relative;
+            flex: 1;
+        }
+
+        .voice-item .voice-bubble::before {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: -8px;
+            width: 0;
+            height: 0;
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
+            border-right: 8px solid var(--white);
+        }
+
+        .voice-item .voice-name {
+            font-size: 11px;
+            color: var(--text-sub);
+            margin-top: 4px;
+            text-align: right;
+        }
+
+        .callout {
+            border-left: 3px solid var(--blue);
+            padding: 16px 20px;
+            background: var(--white);
+            border-radius: 0 10px 10px 0;
+            font-size: 16px;
+            font-weight: 900;
+            color: var(--blue);
+            line-height: 1.7;
+            margin: 24px 0;
+        }
+
+        /* ===== 解決策・チャット風 ===== */
+        .solution {
+            background: var(--white);
+        }
+
+        .chat-ui {
+            background: var(--bg);
+            border-radius: 16px;
+            padding: 24px 16px;
+            margin: 24px 0;
+        }
+
+        .chat-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .chat-row.right {
+            flex-direction: row-reverse;
+        }
+
+        .chat-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .chat-icon.ai {
+            background: var(--text);
+            color: white;
+        }
+
+        .chat-msg {
+            background: var(--white);
+            padding: 14px 18px;
+            border-radius: 16px;
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 1.6;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+            max-width: 85%;
+        }
+
+        .chat-row.right .chat-msg {
+            background: var(--blue);
+            color: white;
+        }
+
+        /* ===== ソリューション詳細 ===== */
+        .benefit {
+            background: var(--blue-bg);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 12px;
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .benefit .num {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--blue);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 14px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .benefit h3 {
+            font-size: 16px;
+            font-weight: 900;
+            margin-bottom: 4px;
+        }
+
+        .benefit p {
+            font-size: 14px;
+            color: var(--text-sub);
+            line-height: 1.7;
+        }
+
+        /* ===== セミナーの流れ ===== */
+        .flow {
+            background: var(--bg);
+        }
+
+        .flow-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 28px 24px;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .flow-card .part {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--blue);
+            background: var(--blue-bg);
+            padding: 3px 12px;
+            border-radius: 50px;
+            margin-bottom: 12px;
+        }
+
+        .flow-card h3 {
+            font-size: 18px;
+            font-weight: 900;
+            margin-bottom: 4px;
+        }
+
+        .flow-card .speaker {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--blue);
+            margin-bottom: 12px;
+        }
+
+        .flow-card p {
+            font-size: 14px;
+            color: var(--text-sub);
+            line-height: 1.8;
+            text-align: left;
+        }
+
+        .flow-arrow {
+            text-align: center;
+            color: var(--blue-soft);
+            font-size: 20px;
+            margin: 4px 0;
+        }
+
+        /* ===== プロフィール ===== */
+        .profiles {
+            background: var(--white);
+        }
+
+        .profile {
+            background: var(--bg);
+            border-radius: 12px;
+            padding: 28px 24px;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .profile .avatar {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            margin: 0 auto 12px;
+            background: var(--blue-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            overflow: hidden;
+        }
+
+        .profile h3 {
+            font-size: 18px;
+            font-weight: 900;
+            margin-bottom: 2px;
+        }
+
+        .profile .role {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--blue);
+            margin-bottom: 12px;
+        }
+
+        .profile p {
+            font-size: 14px;
+            color: var(--text-sub);
+            line-height: 1.8;
+            text-align: left;
+        }
+
+        /* ===== CTA ===== */
+        .cta {
+            background: var(--blue-bg);
+            padding: 56px 24px 64px;
+        }
+
+        .cta-box {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 32px 24px;
+            text-align: center;
+        }
+
+        .cta-box h2 {
+            font-size: 20px;
+            font-weight: 900;
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        .cta-box h2 .em {
+            color: var(--blue);
+        }
+
+        .cta-box .sub {
+            font-size: 14px;
+            color: var(--text-sub);
+            margin-bottom: 28px;
+        }
+
+        .cta-label {
+            display: inline-block;
+            background: var(--blue);
+            color: white;
+            font-size: 13px;
+            font-weight: 900;
+            padding: 5px 18px;
+            border-radius: 50px;
+            margin-bottom: 20px;
+        }
+
+        .steps {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .steps li {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .steps li:last-child {
+            border-bottom: none;
+        }
+
+        .steps li .sn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--blue);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 900;
+            flex-shrink: 0;
+        }
+
+        .note {
+            font-size: 12px;
+            color: var(--text-sub);
+            margin-top: 16px;
+        }
+
+        .safe {
+            margin-top: 24px;
+            background: var(--blue-bg);
+            border-radius: 10px;
+            padding: 14px 20px;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text);
+            text-align: center;
+            line-height: 1.7;
+        }
+
+        /* ===== フッター ===== */
+        footer {
+            text-align: center;
+            padding: 24px;
+            font-size: 11px;
+            color: #bbb;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ヘッダー -->
+    <header class="hero">
+        <div class="container">
+            <div style="display:flex; flex-direction:column; align-items:center; gap:8px; margin-bottom:20px;">
+                <span
+                    style="display:inline-block; background:#2d2d2d; color:white; padding:6px 18px; border-radius:50px; font-size:13px; font-weight:900; letter-spacing:2px;">初心者向けAI活用セミナー</span>
+                <span class="hero-badge">🔰 パソコンが苦手でも大丈夫！</span>
+            </div>
+            <div style="margin-bottom:16px;">
+                <p
+                    style="font-size:13px; font-weight:700; color:var(--blue-soft); letter-spacing:4px; margin-bottom:4px;">
+                    ━━━━━━━━━━━━</p>
+                <p style="font-size:28px; font-weight:900; color:var(--blue); letter-spacing:6px;">第 2 弾</p>
+                <p style="font-size:13px; font-weight:700; color:var(--blue-soft); letter-spacing:4px; margin-top:4px;">
+                    ━━━━━━━━━━━━</p>
+            </div>
+            <h1>
+                もう専門知識はいらない！
+                <span class="accent">やさしいAI×AntiGravity 実践セミナー</span>
+            </h1>
+            <div
+                style="background:var(--white); border:2px solid var(--blue-soft); border-radius:12px; padding:16px; margin: 24px 0; display:inline-block;">
+                <p style="font-size:13px; font-weight:700; color:var(--text-sub); margin-bottom:4px;">＼ 開催日程 ／</p>
+                <p style="font-size:22px; font-weight:900; color:var(--blue); letter-spacing:2px;">3月14日(土) 21:00〜</p>
+            </div>
+            <p class="hero-sub">
+                「AIは使ってみたいけど、なんだか難しそう…」<br>
+                そんなあなたのための、いちばんやさしい入門＆実演セミナーです！
+            </p>
+            <span class="hero-free">参加費 完全無料</span>
+        </div>
+    </header>
+
+    <!-- 問題提起 -->
+    <section class="problem">
+        <div class="container">
+            <span class="sec-label">QUESTION</span>
+            <h2 class="sec-title">
+                <span class="em">「AIって難しそう」</span><br>そう思って諦めていませんか？
+            </h2>
+            <p class="sec-body" style="margin-bottom: 24px;">
+                ちまたには「AI」の情報があふれていますが…
+            </p>
+
+            <div class="voice-item">
+                <div class="voice-avatar">👩</div>
+                <div>
+                    <div class="voice-bubble">「Claude」だの「Cursor」だの「AntiGravity」だの、新しいツールが出すぎて全然追いつけない！💦</div>
+                </div>
+            </div>
+
+            <div class="voice-item">
+                <div class="voice-avatar">👱‍♀️</div>
+                <div>
+                    <div class="voice-bubble">情報が多すぎて、結局どれを使えばいいのか、自分に何ができるのか分からないんです。</div>
+                </div>
+            </div>
+
+            <div class="voice-item">
+                <div class="voice-avatar">🙍‍♀️</div>
+                <div>
+                    <div class="voice-bubble">自分でお店や集客をやりたいけど、パソコンが苦手で…AIに任せられたらいいのに！</div>
+                </div>
+            </div>
+
+            <div class="callout">
+                もしあなたもそう思っているなら<br>どうか安心してください。
+            </div>
+
+            <p class="sec-body">
+                実は今、<strong>「難しい設定」も「専門用語」も一切なしで、AIに丸投げできる時代</strong>が来ています。<br><br>
+                「えっ、本当に？」と思いますよね。だからこそ、<strong>生配信で実際にその魔法のような動きをお見せする</strong>セミナーを企画しました！
+            </p>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- 解決策 -->
+    <section class="solution">
+        <div class="container">
+            <span class="sec-label">SOLUTION</span>
+            <h2 class="sec-title">
+                「作って」と<span class="em">お願いするだけ</span><br>AIが「あなた専属のスタッフ」に！
+            </h2>
+            <p class="sec-body">
+                今回ご紹介する『AntiGravity（アンチグラビティ）』は、ただ質問に答えるだけの辞書ではありません。例えるなら、<strong>「パソコンの中にいる、超優秀なあなたのアシスタント」</strong>です！
+            </p>
+
+            <div class="chat-ui">
+                <p style="text-align: center; font-size: 12px; font-weight: 700; color: #999; margin-bottom: 16px;">
+                    AIとのおしゃべりのイメージ</p>
+
+                <div class="chat-row right">
+                    <div class="chat-icon">👩</div>
+                    <div class="chat-msg">来週のセミナーの募集ページを作って！初心者向けで、優しい感じでお願い！</div>
+                </div>
+
+                <div class="chat-row">
+                    <div class="chat-icon ai">🤖</div>
+                    <div class="chat-msg">分かりました！デザインを組んで、Web上に公開まで全部やっておきますね。</div>
+                </div>
+            </div>
+
+            <p class="sec-body">
+                嘘みたいですが、本当にこれだけ。<strong>あなたが日本語で指示を出すだけで、AIが勝手にパソコンを操作して、ページや作品を作り上げてしまうんです。</strong>
+            </p>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- 実績とベネフィット -->
+    <section class="benefits">
+        <div class="container">
+            <span class="sec-label">BENEFITS</span>
+            <h2 class="sec-title">
+                パソコンが苦手でも<br><span class="em">これ全部、丸投げできます！</span>
+            </h2>
+
+            <p class="sec-body" style="margin-bottom: 24px;">
+                実際に、私たちもこの『AntiGravity』に頼んで、こんなことをしてもらっています！
+            </p>
+
+            <div class="benefit">
+                <div class="num">1</div>
+                <div>
+                    <h3>SNSの「告知文章30日分」を瞬時に作成</h3>
+                    <p>毎日「何書こう…」と悩む時間はゼロに。「30日分の投稿作って！」の一言で数分で完了！</p>
+                </div>
+            </div>
+
+            <div class="benefit">
+                <div class="num">2</div>
+                <div>
+                    <h3>「ホームページ（LP）」を自動で作成・公開</h3>
+                    <p>業者に頼めば何十万円もかかるページを、AIが数時間で自動作成。あなたは「色をもう少し明るくして」と言うだけです。</p>
+                </div>
+            </div>
+
+            <div class="benefit">
+                <div class="num">3</div>
+                <div>
+                    <h3>面倒な毎日の作業を「全自動化」する</h3>
+                    <p>「これ毎回やるの面倒だな…」と思う作業をAIに教えれば、ボタン一つで終わる仕組みを勝手に作ってくれます。</p>
+                </div>
+            </div>
+
+            <div
+                style="background:var(--blue-soft); color:white; padding:24px; border-radius:12px; text-align:center; margin-top:32px;">
+                <h3 style="font-size: 16px; margin-bottom: 8px;">私が自分で手を動かした時間は</h3>
+                <p style="font-size: 32px; font-weight: 900; letter-spacing: 2px;">ほぼ【ゼロ】です</p>
+                <p style="font-size: 14px; margin-top: 12px; font-weight: 700;">浮いた時間で、子供と遊んだり、<br>ゆっくりお茶を飲んだりできるんです！
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- セミナーの流れ -->
+    <section class="flow">
+        <div class="container">
+            <span class="sec-label">PROGRAM</span>
+            <h2 class="sec-title">当日はこんな内容をお届けします</h2>
+
+            <p class="sec-body" style="margin-bottom: 24px;">
+                難しいスライドや小難しい説明は一切しません！<br>
+                <strong>私たちが実際に「どうやってAIにお願いし、AIがどうやって実際のモノを作り上げていくのか」を生放送でお見せします。</strong>
+            </p>
+
+            <div class="flow-card">
+                <span class="part">前半パート</span>
+                <h3>あひるが魅せる「作る力」の実演！</h3>
+                <p class="speaker">担当：あひる 🦆</p>
+                <p>私が実際にAIを使ってどんなツールやシステムを作ってきたのか、その裏側と「AIが勝手に手を動かして作り上げる衝撃の瞬間」をお見せします！</p>
+            </div>
+
+            <p class="flow-arrow">▼</p>
+
+            <div class="flow-card">
+                <span class="part">後半パート</span>
+                <h3>はやとが魅せる「届ける力」の実演！</h3>
+                <p class="speaker">担当：はやと</p>
+                <p>作ったものをどうやって売るのか？普通なら挫折するSNSの投稿作成、noteの執筆、プロモーションの設計などを、AIを使って「目の前で一瞬で組み上げる」様子をお見せします！</p>
+            </div>
+
+            <div style="text-align:center; margin-top: 24px;">
+                <p class="sec-body"><strong>「えっ！AIにこんなことまで丸投げできるの！？」</strong><br>画面の向こうで、あなたの常識が180度ひっくり返ることをお約束します！</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- プロフィール -->
+    <section class="profiles">
+        <div class="container">
+            <span class="sec-label">SPEAKERS</span>
+            <h2 class="sec-title">こんな2人がお届けします</h2>
+
+            <div class="profile">
+                <div class="avatar"><img src="あひる.png" alt="あひる" style="width:100%;height:100%;object-fit:cover;">
+                </div>
+                <h3>あひる</h3>
+                <p class="role">COCO代表 / マーケター / AI事業も展開中</p>
+                <p>
+                    マーケティング会社を経営しながら、法人向けにAI事業も手がける。「家から一歩も出なくても、自分の力で稼げる」環境づくりをミッションに活動中。堅苦しいのが大キライ。「にがてな人にこそ、わかりやすく伝えたい」がモットーの、やさしいマーケターです。
+                </p>
+            </div>
+
+            <div class="profile">
+                <div class="avatar"><img src="はやと.jpg" alt="はやと" style="width:100%;height:100%;object-fit:cover;">
+                </div>
+                <h3>はやと</h3>
+                <p class="role">AI活用スペシャリスト</p>
+                <p>日常の面倒な作業をAIで次々と自動化するプロフェッショナル。「難しい専門用語を使わずに、誰でもAIを使えるようにする」ことをモットーに、今回はAntiGravityを使った魔法のような実演を担当します。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- CTA -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-box">
+                <h2>もう<span class="em">「難しい」</span>は卒業。<br>あなたの時間を増やしませんか？</h2>
+
+                <div style="background:var(--blue-bg); border-radius:12px; padding:16px; margin: 24px 0;">
+                    <p style="font-size:13px; font-weight:700; color:var(--text-sub); margin-bottom:4px;">開催日時</p>
+                    <p style="font-size:20px; font-weight:900; color:var(--blue); letter-spacing:2px;">3月14日(土) 21:00〜
+                    </p>
+                    <p style="font-size:13px; font-weight:700; color:var(--text); margin-top:8px;">場所：オンライン生配信（無料）</p>
+                </div>
+
+                <p class="sub">失うものは何もありません。<br>「自分にもAIって使えるんだ！」と確信できるはずです。</p>
+
+                <span class="cta-label">カンタン3ステップで参加</span>
+
+                <ul class="steps">
+                    <li><span class="sn">1</span><span><strong>はやと</strong> と <strong>あひる</strong> を両方フォロー</span></li>
+                    <li><span class="sn">2</span><span>この投稿に <strong>「いいね」＋「再投稿」</strong></span></li>
+                    <li><span class="sn">3</span><span>コメント欄に <strong>「参加します！」</strong> と一言</span></li>
+                </ul>
+                <p class="note">※確認後、順番にDMで参加リンクをお届けします</p>
+
+                <div class="safe">
+                    わからないことがあっても大丈夫。<br>当日はやさしくサポートします 🤗
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>&copy; 2026 COCO / 第2弾 AntiGravity 実践セミナー</footer>
+
+</body>
+
+</html>
